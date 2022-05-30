@@ -1,21 +1,8 @@
-import {
-  Text,
-  View,
-  SafeAreaView,
-  Image,
-  StatusBar,
-  FlatList,
-} from "react-native";
 import React from "react";
-import { COLORS, SIZES, SHADOWS, assets, FONTS } from "../constants";
-import {
-  CircleButton,
-  RectButton,
-  SubInfo,
-  FocusedStatusBar,
-  DetailsDesc,
-  DetailsBid,
-} from "../components";
+import { View, Text, SafeAreaView, Image, StatusBar, FlatList } from "react-native";
+
+import { COLORS, SIZES, assets, SHADOWS, FONTS } from "../constants";
+import { CircleButton, RectButton, SubInfo, DetailsDesc, DetailsBid, FocusedStatusBar } from "../components";
 
 const DetailsHeader = ({ data, navigation }) => (
   <View style={{ width: "100%", height: 373 }}>
@@ -27,10 +14,11 @@ const DetailsHeader = ({ data, navigation }) => (
 
     <CircleButton
       imgUrl={assets.left}
-      handlepress={() => navigation.goBack()}
+      handlePress={() => navigation.goBack()}
       left={15}
       top={StatusBar.currentHeight + 10}
     />
+
     <CircleButton
       imgUrl={assets.heart}
       right={15}
@@ -49,6 +37,7 @@ const Details = ({ route, navigation }) => {
         backgroundColor="transparent"
         translucent={true}
       />
+
       <View
         style={{
           width: "100%",
@@ -63,18 +52,22 @@ const Details = ({ route, navigation }) => {
       >
         <RectButton minWidth={170} fontSize={SIZES.large} {...SHADOWS.dark} />
       </View>
+
       <FlatList
         data={data.bids}
-        renderItem={(item) => <DetailsBid bid={item} />}
+        renderItem={({ item }) => <DetailsBid bid={item} />}
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: SIZES.extraLarge * 3 }}
+        contentContainerStyle={{
+          paddingBottom: SIZES.extraLarge * 3,
+        }}
         ListHeaderComponent={() => (
           <React.Fragment>
             <DetailsHeader data={data} navigation={navigation} />
             <SubInfo />
             <View style={{ padding: SIZES.font }}>
               <DetailsDesc data={data} />
+
               {data.bids.length > 0 && (
                 <Text
                   style={{
@@ -83,7 +76,7 @@ const Details = ({ route, navigation }) => {
                     color: COLORS.primary,
                   }}
                 >
-                  Current Bids
+                  Current Bid
                 </Text>
               )}
             </View>
